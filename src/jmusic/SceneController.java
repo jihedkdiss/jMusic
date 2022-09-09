@@ -7,6 +7,8 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,8 +62,24 @@ public class SceneController implements Initializable {
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         songLabel.setText(songs.get(songNumber).getName());
+        
+        for(int i = 0; i < speeds.length; i++) {
+            speedBox.getItems().add(Integer.toString(speeds[i])+"%");
+        }
+        
+        speedBox.setOnAction(this::changeSpeed);
+        
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
+            }
+            
+        });
+        
     }
     public void playMedia() {
+        changeSpeed(null);
         mediaPlayer.play();
     }
     public void pauseMedia() {
@@ -71,6 +89,21 @@ public class SceneController implements Initializable {
         mediaPlayer.seek(Duration.seconds(0));
     }
     public void previousMedia() {
+        if(songNumber > 0) {
+            songNumber--;
+            mediaPlayer.stop();
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            songLabel.setText(songs.get(songNumber).getName());
+            playMedia();
+        } else {
+            songNumber = songs.size() - 1;
+            mediaPlayer.stop();
+            media = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            songLabel.setText(songs.get(songNumber).getName());
+            playMedia();
+        }
         
     }
     public void nextMedia() {
@@ -83,7 +116,6 @@ public class SceneController implements Initializable {
             playMedia();
         } else {
             songNumber = 0;
-            songNumber++;
             mediaPlayer.stop();
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
@@ -92,7 +124,11 @@ public class SceneController implements Initializable {
         }
     }
     public void changeSpeed(ActionEvent event) {
-        
+        if(speedBox.getValue() == null) {
+            mediaPlayer.setRate(1);
+        } else {
+            mediaPlayer.setRate(Integer.parseInt(speedBox.getValue().substring(0, speedBox.getValue().length() - 1)) * 0.01);
+        }
     }
     public void beginTimer() {
         

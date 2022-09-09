@@ -43,7 +43,7 @@
          </font>
       </Button>
       <ComboBox fx:id="speedBox" layoutX="336.0" layoutY="217.0" prefHeight="57.0" prefWidth="150.0" promptText="Speed" />
-      <Slider fx:id="volumeSlider" layoutX="165.0" layoutY="316.0" max="200.0" prefHeight="18.0" prefWidth="265.0" value="100.0" />
+      <Slider fx:id="volumeSlider" layoutX="165.0" layoutY="316.0" max="100.0" prefHeight="18.0" prefWidth="265.0" value="50.0" />
       <Label layoutX="268.0" layoutY="334.0" text="Volume" textFill="WHITE">
          <font>
             <Font size="19.0" />
