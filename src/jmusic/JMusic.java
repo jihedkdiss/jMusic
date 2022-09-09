@@ -19,6 +19,7 @@ public class JMusic extends Application {
 
         stage.setScene(scene);
         stage.show();
+        
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {

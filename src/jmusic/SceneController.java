@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -44,6 +46,7 @@ public class SceneController implements Initializable {
     private int[] speeds = {25, 50, 75, 100, 125, 150, 175, 200};
     private Timer timer;
     private TimerTask task;
+    //private ImageView imageView;
     private boolean running;
     private boolean isPlay = true;
 
@@ -66,7 +69,10 @@ public class SceneController implements Initializable {
         for (int i = 0; i < speeds.length; i++) {
             speedBox.getItems().add(Integer.toString(speeds[i]) + "%");
         }
-
+        /*File file = new File("C:\\Users\\Jihed\\Documents\\NetBeansProjects\\jMusic\\Pictures\\Logo.png");
+        Image image = new Image(file.toURI().toString());
+        imageView.setImage(image);*/
+        
         speedBox.setOnAction(this::changeSpeed);
 
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -86,16 +92,14 @@ public class SceneController implements Initializable {
             mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
             mediaPlayer.play();
             isPlay = false;
+            pauseButton.setText("");
         } else {
             //PAUSE
             cancelTimer();
             mediaPlayer.pause();
             isPlay = true;
+            pauseButton.setText("");
         }
-    }
-
-    public void pauseMedia() {
-        
     }
 
     public void resetMedia() {
@@ -113,7 +117,6 @@ public class SceneController implements Initializable {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
         } else {
             songNumber = songs.size() - 1;
             mediaPlayer.stop();
@@ -123,7 +126,6 @@ public class SceneController implements Initializable {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
         }
 
     }
@@ -138,7 +140,6 @@ public class SceneController implements Initializable {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
         } else {
             songNumber = 0;
             mediaPlayer.stop();
@@ -148,7 +149,6 @@ public class SceneController implements Initializable {
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
-            playMedia();
         }
     }
 
