@@ -27,3 +27,8 @@ replay_pid*
 nbproject/
 *.xml
 *.mf
+/build/
+/dist/
+
+# Music to work with
+Music/

@@ -27,7 +27,7 @@
             <Font size="27.0" />
          </font>
       </Button>
-      <Button fx:id="stopButton" layoutX="350.0" layoutY="123.0" mnemonicParsing="false" onAction="#stopMedia" text="Stop">
+      <Button fx:id="stopButton" layoutX="350.0" layoutY="123.0" mnemonicParsing="false" onAction="#resetMedia" text="Reset">
          <font>
             <Font size="27.0" />
          </font>
