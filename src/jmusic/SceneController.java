@@ -45,6 +45,7 @@ public class SceneController implements Initializable {
     private Timer timer;
     private TimerTask task;
     private boolean running;
+    private boolean isPlay = true;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,19 +76,26 @@ public class SceneController implements Initializable {
             }
 
         });
-        songProgressBar.setStyle("-fx-accent: green;");
     }
 
-    public void playMedia() {
-        beginTimer();
-        changeSpeed(null);
-        mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
-        mediaPlayer.play();
+    public void handleMedia() {
+        if(isPlay) {
+            //PLAY
+            beginTimer();
+            changeSpeed(null);
+            mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
+            mediaPlayer.play();
+            isPlay = false;
+        } else {
+            //PAUSE
+            cancelTimer();
+            mediaPlayer.pause();
+            isPlay = true;
+        }
     }
 
     public void pauseMedia() {
-        cancelTimer();
-        mediaPlayer.pause();
+        
     }
 
     public void resetMedia() {
