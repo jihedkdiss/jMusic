@@ -21,7 +21,7 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="songProgress" layoutX="49.0" layoutY="80.0" prefHeight="18.0" prefWidth="497.0" progress="0.0" />
+      <ProgressBar fx:id="songProgressBar" layoutX="49.0" layoutY="80.0" prefHeight="18.0" prefWidth="497.0" progress="0.0" />
       <Button fx:id="playButton" layoutX="159.0" layoutY="123.0" mnemonicParsing="false" onAction="#playMedia" text="Play">
          <font>
             <Font size="27.0" />

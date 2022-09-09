@@ -6,6 +6,7 @@ import java.net.URL;
 import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
 import java.util.TimerTask;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +17,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javax.management.timer.Timer;
 
 public class SceneController implements Initializable {
     
@@ -76,22 +76,27 @@ public class SceneController implements Initializable {
             }
             
         });
-        
+        songProgressBar.setStyle("-fx-accent: green;");
     }
     public void playMedia() {
+        beginTimer();
         changeSpeed(null);
+        mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
         mediaPlayer.play();
     }
     public void pauseMedia() {
+        cancelTimer();
         mediaPlayer.pause();
     }
     public void resetMedia() {
+        songProgressBar.setProgress(0);
         mediaPlayer.seek(Duration.seconds(0));
     }
     public void previousMedia() {
         if(songNumber > 0) {
             songNumber--;
             mediaPlayer.stop();
+            if(running) cancelTimer();
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
@@ -99,6 +104,7 @@ public class SceneController implements Initializable {
         } else {
             songNumber = songs.size() - 1;
             mediaPlayer.stop();
+            if(running) cancelTimer();
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
@@ -110,6 +116,7 @@ public class SceneController implements Initializable {
         if(songNumber < songs.size() - 1) {
             songNumber++;
             mediaPlayer.stop();
+            if(running) cancelTimer();
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
@@ -117,6 +124,7 @@ public class SceneController implements Initializable {
         } else {
             songNumber = 0;
             mediaPlayer.stop();
+            if(running) cancelTimer();
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
@@ -131,9 +139,19 @@ public class SceneController implements Initializable {
         }
     }
     public void beginTimer() {
-        
+        timer = new Timer();
+        task = new TimerTask() {
+            public void run() {
+                running = true;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = media.getDuration().toSeconds();
+                songProgressBar.setProgress(current/end);
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 500);
     }
+
     public void cancelTimer() {
-        
+        running = false;
     }
 }
