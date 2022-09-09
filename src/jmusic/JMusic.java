@@ -1,4 +1,3 @@
-
 package jmusic;
 
 import javafx.application.Application;
@@ -11,13 +10,13 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class JMusic extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Scene.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -35,5 +34,5 @@ public class JMusic extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
