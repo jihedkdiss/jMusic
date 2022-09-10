@@ -17,7 +17,7 @@ public class JMusic extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Scene.fxml"));
 
         Scene scene = new Scene(root);
-        stage.setTitle("jMusic Player");
+        stage.setTitle("jMusic Player by @jihedkdiss");
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
         stage.setWidth(600);
