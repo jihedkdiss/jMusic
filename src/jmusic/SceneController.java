@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -64,7 +65,7 @@ public class SceneController implements Initializable {
 
         media = new Media(songs.get(songNumber).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-        songLabel.setText(songs.get(songNumber).getName());
+        songLabel.setText(songs.get(songNumber).getName().substring(0, songs.get(songNumber).getName().length() - 4));
 
         for (int i = 0; i < speeds.length; i++) {
             speedBox.getItems().add(Integer.toString(speeds[i]) + "%");
@@ -114,7 +115,7 @@ public class SceneController implements Initializable {
             }
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName().substring(0, songs.get(songNumber).getName().length() - 4));
         } else {
             songNumber = songs.size() - 1;
             mediaPlayer.stop();
@@ -123,7 +124,7 @@ public class SceneController implements Initializable {
             }
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName().substring(0, songs.get(songNumber).getName().length() - 4));
         }
         handleMedia();
     }
@@ -137,7 +138,7 @@ public class SceneController implements Initializable {
             }
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName().substring(0, songs.get(songNumber).getName().length() - 4));
         } else {
             songNumber = 0;
             mediaPlayer.stop();
@@ -146,7 +147,7 @@ public class SceneController implements Initializable {
             }
             media = new Media(songs.get(songNumber).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            songLabel.setText(songs.get(songNumber).getName());
+            songLabel.setText(songs.get(songNumber).getName().substring(0, songs.get(songNumber).getName().length() - 4));
         }
         handleMedia();
     }
@@ -157,6 +158,15 @@ public class SceneController implements Initializable {
         } else {
             mediaPlayer.setRate(Integer.parseInt(speedBox.getValue().substring(0, speedBox.getValue().length() - 1)) * 0.01);
         }
+    }
+    
+    public void closeApp() {
+        Platform.exit();
+        System.exit(0);
+    }
+    
+    public void browseMusic() {
+        System.out.println("TODO: implement feature");
     }
 
     public void beginTimer() {
