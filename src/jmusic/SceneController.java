@@ -33,6 +33,8 @@ public class SceneController implements Initializable {
     private Slider volumeSlider;
     @FXML
     private ProgressBar songProgressBar;
+    @FXML
+    private ImageView imageView;
 
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -46,7 +48,6 @@ public class SceneController implements Initializable {
     private int[] speeds = {25, 50, 75, 100, 125, 150, 175, 200};
     private Timer timer;
     private TimerTask task;
-    //private ImageView imageView;
     private boolean running;
     private boolean isPlay = true;
 
@@ -55,10 +56,9 @@ public class SceneController implements Initializable {
         songs = new ArrayList<File>();
         directory = new File("Music");
         files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
+        if(files != null) {
+            for(File file : files) {
                 songs.add(file);
-                System.out.println(file);
             }
         }
 
@@ -69,10 +69,10 @@ public class SceneController implements Initializable {
         for (int i = 0; i < speeds.length; i++) {
             speedBox.getItems().add(Integer.toString(speeds[i]) + "%");
         }
-        /*File file = new File("C:\\Users\\Jihed\\Documents\\NetBeansProjects\\jMusic\\Pictures\\Logo.png");
-        Image image = new Image(file.toURI().toString());
-        imageView.setImage(image);*/
-        
+
+        Image image = new Image("icon.png");
+        imageView.setImage(image);
+
         speedBox.setOnAction(this::changeSpeed);
 
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -85,8 +85,7 @@ public class SceneController implements Initializable {
     }
 
     public void handleMedia() {
-        if(isPlay) {
-            //PLAY
+        if (isPlay) {
             beginTimer();
             changeSpeed(null);
             mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
@@ -94,7 +93,6 @@ public class SceneController implements Initializable {
             isPlay = false;
             pauseButton.setText("");
         } else {
-            //PAUSE
             cancelTimer();
             mediaPlayer.pause();
             isPlay = true;
@@ -127,7 +125,7 @@ public class SceneController implements Initializable {
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
         }
-
+        handleMedia();
     }
 
     public void nextMedia() {
@@ -150,6 +148,7 @@ public class SceneController implements Initializable {
             mediaPlayer = new MediaPlayer(media);
             songLabel.setText(songs.get(songNumber).getName());
         }
+        handleMedia();
     }
 
     public void changeSpeed(ActionEvent event) {
