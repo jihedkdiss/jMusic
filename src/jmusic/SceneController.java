@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javax.swing.JOptionPane;
 
 public class SceneController implements Initializable {
 
@@ -57,8 +58,8 @@ public class SceneController implements Initializable {
         songs = new ArrayList<File>();
         directory = new File("Music");
         files = directory.listFiles();
-        if(files != null) {
-            for(File file : files) {
+        if (files != null) {
+            for (File file : files) {
                 songs.add(file);
             }
         }
@@ -83,6 +84,18 @@ public class SceneController implements Initializable {
             }
 
         });
+    }
+
+    public void browseMusic() {
+            System.out.println("Browse button pressed");
+            String location = JOptionPane.showInputDialog(null, "Please enter music location", "jMusic | Import Music", 1);
+            directory = new File(location);
+            files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    songs.add(file);
+                }
+            }
     }
 
     public void handleMedia() {
@@ -159,14 +172,10 @@ public class SceneController implements Initializable {
             mediaPlayer.setRate(Integer.parseInt(speedBox.getValue().substring(0, speedBox.getValue().length() - 1)) * 0.01);
         }
     }
-    
+
     public void closeApp() {
         Platform.exit();
         System.exit(0);
-    }
-    
-    public void browseMusic() {
-        System.out.println("TODO: implement feature");
     }
 
     public void beginTimer() {
