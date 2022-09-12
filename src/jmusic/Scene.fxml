@@ -30,9 +30,9 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Circle fill="#1f93ff00" layoutX="300.0" layoutY="234.0" radius="273.0" strokeType="INSIDE" strokeWidth="5.0">
+      <Circle fill="#1f93ff00" layoutX="300.0" layoutY="234.0" radius="273.0" strokeType="INSIDE" strokeWidth="7.5">
          <stroke>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+            <LinearGradient endX="1.0" startX="1.0">
                <stops>
                   <Stop color="#6f00ff" />
                   <Stop color="#ee00ff" offset="1.0" />
@@ -77,12 +77,12 @@
             <GaussianBlur radius="25.0" />
          </effect>
       </Circle>
-      <Circle layoutX="300.0" layoutY="384.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
+      <Circle fx:id="playCircle" layoutX="300.0" layoutY="384.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
-                  <Stop color="#f200ff" />
-                  <Stop color="#6a00ff" offset="1.0" />
+                  <Stop color="#6a00ff" />
+                  <Stop color="#f200ff" offset="1.0" />
                </stops>
             </LinearGradient>
          </fill>
@@ -117,29 +117,19 @@
       </Label>
       <ComboBox fx:id="speedBox" layoutX="385.0" layoutY="370.0" prefHeight="28.0" prefWidth="77.0" promptText="100%" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: white; -fx-border-radius: 20px; -fx-border-width: 2px; -fx-color: white; -fx-accent: white;" />
       <Slider fx:id="volumeSlider" layoutX="385.0" layoutY="108.0" orientation="VERTICAL" prefHeight="102.0" prefWidth="14.0" style="-fx-accent: red; -fx-background-radius: 20px;" value="50.0" />
-      <ProgressBar fx:id="songProgressBar" layoutX="200.0" layoutY="324.0" prefWidth="200.0" progress="1.0" style="-fx-accent: white; -fx-text-box-border: 0;">
+      <ProgressBar fx:id="songProgressBar" layoutX="200.0" layoutY="324.0" prefWidth="200.0" progress="0.0" style="-fx-accent: white; -fx-text-box-border: 0;">
          <effect>
-            <MotionBlur radius="5.0" />
+            <MotionBlur />
          </effect>
       </ProgressBar>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000018" height="8.0" layoutX="182.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="236.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000018" height="15.0" layoutX="182.0" layoutY="321.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="236.0" />
       <Circle fill="WHITE" layoutX="201.0" layoutY="384.0" radius="14.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
       <Button fx:id="previousButton1" alignment="CENTER" layoutX="187.0" layoutY="370.0" mnemonicParsing="false" onAction="#resetMedia" prefHeight="28.0" prefWidth="28.0" style="-fx-background-color: transparent;" text="" textAlignment="CENTER">
          <font>
             <Font size="10.5" />
          </font>
       </Button>
-      <Circle fill="#ffffff00" layoutX="558.0" layoutY="42.0" radius="28.0" strokeType="INSIDE" strokeWidth="3.0">
-         <stroke>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="#f200ff" />
-                  <Stop color="#6a00ff" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </stroke>
-      </Circle>
-      <Circle fill="TRANSPARENT" layoutX="42.0" layoutY="42.0" radius="28.0" strokeType="INSIDE" strokeWidth="3.0">
+      <Circle fx:id="mycircle" fill="#ffffff00" layoutX="558.0" layoutY="42.0" radius="28.0" strokeType="INSIDE" strokeWidth="3.0">
          <stroke>
             <LinearGradient endY="1.0" startX="1.0">
                <stops>
@@ -157,6 +147,16 @@
             <DropShadow color="#000000bf" offsetY="2.0" />
          </effect>
       </Button>
+      <Circle fx:id="mycircle2" fill="TRANSPARENT" layoutX="42.0" layoutY="42.0" radius="28.0" strokeType="INSIDE" strokeWidth="3.0">
+         <stroke>
+            <LinearGradient endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="#f200ff" />
+                  <Stop color="#6a00ff" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Circle>
       <Button fx:id="pauseButton11" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#browseMusic" prefHeight="56.0" prefWidth="56.0" style="-fx-background-color: transparent;" text="" textFill="WHITE">
          <font>
             <Font name="Segoe MDL2 Assets" size="22.0" />
@@ -172,6 +172,11 @@
          <effect>
             <Reflection topOffset="-7.5" topOpacity="0.35" />
          </effect>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="548.0" layoutY="375.0" prefHeight="17.0" prefWidth="38.0" text="v1.2" textFill="WHITE">
+         <font>
+            <Font name="Raleway Regular" size="16.0" />
+         </font>
       </Label>
    </children>
 </AnchorPane>

@@ -13,13 +13,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javax.swing.JOptionPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 public class SceneController implements Initializable {
 
@@ -40,14 +42,11 @@ public class SceneController implements Initializable {
 
     private Media media;
     private MediaPlayer mediaPlayer;
-
     private File directory;
     private File[] files;
-
     private ArrayList<File> songs;
-
     private int songNumber;
-    private int[] speeds = {25, 50, 75, 100, 125, 150, 175, 200};
+    private final int[] speeds = {25, 50, 75, 100, 125, 150, 175, 200};
     private Timer timer;
     private TimerTask task;
     private boolean running;
@@ -86,7 +85,8 @@ public class SceneController implements Initializable {
         });
     }
 
-    public void browseMusic() {
+    public void browseMusic(ActionEvent event) {
+        /*
             System.out.println("Browse button pressed");
             String location = JOptionPane.showInputDialog(null, "Please enter music location", "jMusic | Import Music", 1);
             directory = new File(location);
@@ -96,6 +96,14 @@ public class SceneController implements Initializable {
                     songs.add(file);
                 }
             }
+         */
+        Window window = ((Node) (event.getSource())).getScene().getWindow();
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter ext = new FileChooser.ExtensionFilter("MP3 Files (.mp3)", "*.mp3");
+        fc.getExtensionFilters().add(ext);
+        File song = fc.showOpenDialog(window);
+        event.consume();
+        songs.add(song);
     }
 
     public void handleMedia() {
