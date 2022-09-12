@@ -55,7 +55,7 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         songs = new ArrayList<File>();
-        directory = new File("Music");
+        directory = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Music");
         files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
